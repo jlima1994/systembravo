@@ -4,9 +4,23 @@ function ir(p){ location.href = p; }
 // PÁGINAS INICIAIS
 // =====================
 function salvarPagina2(){
-localStorage.setItem("data", data.value);
-localStorage.setItem("tipo", document.querySelector('input[name="tipo"]:checked').value);
-localStorage.setItem("descricao", descricao.value);
+
+const data = document.getElementById("data").value;
+
+const tipoSelecionado = document.querySelector('input[name="tipo"]');
+if(!tipoSelecionado){
+alert("Selecione o tipo de serviço!");
+return;
+}
+
+const tipo = tipoSelecionado.value;
+
+const descricao = document.getElementById("descricao").value;
+
+localStorage.setItem("data", data);
+localStorage.setItem("tipo", tipo);
+localStorage.setItem("descricao", descricao);
+
 ir("pagina3.html");
 }
 
