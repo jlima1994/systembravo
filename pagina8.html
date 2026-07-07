@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<body>
+
+<h3>Pedágios</h3>
+
+<div id="pedagios"></div>
+
+<button onclick="finalizarRegistro()">Finalizar Registro</button>
+
+<script src="app.js"></script>
+
+<script>
+for(let i=0;i<10;i++){
+  document.getElementById("pedagios").innerHTML += `
+  <select id="qtd${i}">
+    ${[...Array(21).keys()].map(n=>`<option>${n}</option>`).join("")}
+  </select>
+  x <input type="number" id="val${i}" max="100" step="0.01"><br><br>
+  `;
+}
+</script>
+
+</body>
+</html>
