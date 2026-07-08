@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
 <body>
 
 <h3>Tipo de Serviço</h3>
 
-Data: <input type="date" id="data"><br><br>
+<input type="date" id="data">
 
-<input type="radio" name="tipo" value="Escolta"> Escolta <input type="radio" name="tipo" value="Preservação"> Preservação<br><br>
+<label><input type="radio" name="tipo" value="Escolta"> Escolta</label> <label><input type="radio" name="tipo" value="Preservação"> Preservação</label>
 
-Descrição:<br>
-
-<textarea id="descricao"></textarea><br><br>
+<textarea id="descricao" placeholder="Descrição"></textarea>
 
 <button onclick="salvarPagina2()">Próximo</button>
-
-<!-- IMPORTANTE: script no FINAL -->
 
 <script src="app.js"></script>
 
