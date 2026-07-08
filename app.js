@@ -35,18 +35,32 @@ ir("pagina4.html");
 
 // ================= PAGINA 4 =================
 function salvarPagina4(){
-  const hora = document.getElementById("horaInicialDeslocamento").value;
-  const km = document.getElementById("kmInicialDeslocamento").value;
+  try {
 
-  if(hora === "" || km === ""){
-    alert("Preencha os campos");
-    return;
+    const horaEl = document.getElementById("horaInicialDeslocamento");
+    const kmEl = document.getElementById("kmInicialDeslocamento");
+
+    if(!horaEl || !kmEl){
+      alert("Erro: campos não encontrados");
+      return;
+    }
+
+    const hora = horaEl.value;
+    const km = kmEl.value;
+
+    if(hora === "" || km === ""){
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    localStorage.setItem("horaInicialDeslocamento", hora);
+    localStorage.setItem("kmInicialDeslocamento", km);
+
+    location.href = "pagina5.html";
+
+  } catch(e){
+    alert("Erro: " + e.message);
   }
-
-  localStorage.setItem("horaInicialDeslocamento", hora);
-  localStorage.setItem("kmInicialDeslocamento", km);
-
-  location.href = "pagina5.html";
 }
 
 // ================= PAGINA 5 =================
