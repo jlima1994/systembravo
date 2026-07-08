@@ -3,6 +3,10 @@ function ir(p){ location.href = p; }
 // =====================
 // PÁGINAS INICIAIS
 // =====================
+function ir(pagina){
+location.href = pagina;
+}
+
 function salvarPagina2(){
 
 const data = document.getElementById("data").value;
