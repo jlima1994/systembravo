@@ -57,8 +57,24 @@ ir("pagina4.html");
 
 // PAGINA 4
 function salvarPagina4(){
-salvarTemp("kmInicialDesloc", document.getElementById("km").value);
-ir("pagina5.html");
+
+  const hora = document.getElementById("horaInicialDesloc");
+  const km = document.getElementById("kmInicialDesloc");
+
+  if(!hora || !km){
+    alert("Erro nos campos da página 4");
+    return;
+  }
+
+  if(hora.value === "" || km.value === ""){
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  salvarTemp("horaInicialDesloc", hora.value);
+  salvarTemp("kmInicialDesloc", km.value);
+
+  ir("pagina5.html");
 }
 
 // PAGINA FINAL
