@@ -48,10 +48,10 @@
 <script src="app.js?v=9"></script>
 
 <script>
+<script>
 function carregarResumo(){
 
   const data = (localStorage.getItem("data") || "").toUpperCase();
-
   const tipo = (localStorage.getItem("tipoServico") || "").toUpperCase();
   const descricao = (localStorage.getItem("descricao") || "").toUpperCase();
 
@@ -59,25 +59,22 @@ function carregarResumo(){
   const motorista = (localStorage.getItem("motorista") || "").toUpperCase();
   const seguranca = (localStorage.getItem("seguranca") || "").toUpperCase();
 
-  const km4 = localStorage.getItem("kmInicialDeslocamento") || 0;
-  const hora4 = (localStorage.getItem("horaInicialDeslocamento") || "").toUpperCase();
+  const kmIniDesloc = localStorage.getItem("kmInicialDeslocamento") || "0";
+  const horaIniDesloc = localStorage.getItem("horaInicialDeslocamento") || "";
 
-  const km5 = localStorage.getItem("kmInicialServico") || 0;
-  const hora5 = (localStorage.getItem("horaInicialServico") || "").toUpperCase();
+  const kmIniServ = localStorage.getItem("kmInicialServico") || "0";
+  const horaIniServ = localStorage.getItem("horaInicialServico") || "";
 
-  const km6 = localStorage.getItem("kmFinalServico") || 0;
-  const hora6 = (localStorage.getItem("horaFinalServico") || "").toUpperCase();
+  const kmFimServ = localStorage.getItem("kmFinalServico") || "0";
+  const horaFimServ = localStorage.getItem("horaFinalServico") || "";
 
-  const km7 = localStorage.getItem("kmFinalDeslocamento") || 0;
-  const hora7 = (localStorage.getItem("horaFinalDeslocamento") || "").toUpperCase();
+  const kmFimDesloc = localStorage.getItem("kmFinalDeslocamento") || "0";
+  const horaFimDesloc = localStorage.getItem("horaFinalDeslocamento") || "";
 
-  const pedagios = JSON.parse(localStorage.getItem("pedagios") || "[]");
-
-  const kmTotal = km7 - km4;
+  const totalKm = kmFimDesloc - kmIniDesloc;
 
   let texto = `
-DATA: ${data}
-
+${data}
 ${tipo} - ${descricao}
 
 EQUIPE:
@@ -85,33 +82,18 @@ VEÍCULO: ${placa}
 MOT: ${motorista}
 SEG: ${seguranca}
 
-DESLOCAMENTO: ${km4} (${hora4})
-INICIO ${tipo}: ${km5} (${hora5})
-FINAL ${tipo}: ${km6} (${hora6})
-DESLOCAMENTO: ${km7} (${hora7})
+DESLOCAMENTO: ${kmIniDesloc} ${horaIniDesloc}
+INICIO ${tipo}: ${kmIniServ} ${horaIniServ}
+FINAL ${tipo}: ${kmFimServ} ${horaFimServ}
+DESLOCAMENTO: ${kmFimDesloc} ${horaFimDesloc}
 
-DESLOCAMENTO TOTAL: ${kmTotal} KM
-
-PEDÁGIOS:
+DESLOCAMENTO TOTAL: ${totalKm} KM
 `;
-
-  if(pedagios.length === 0){
-    texto += "NENHUM\n";
-  } else {
-    pedagios.forEach(p => {
-      texto += `QTD: ${p.quantidade} | VALOR: R$ ${p.valor}\n`;
-    });
-  }
 
   document.getElementById("resumo").textContent = texto;
 }
 
-function irRelatorio(){
-  location.href = "pagina10.html";
-}
-
 carregarResumo();
 </script>
-
 </body>
 </html>
