@@ -15,11 +15,27 @@ import {
   where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "SUA_KEY",
-  authDomain: "SEU_DOMINIO",
-  projectId: "SEU_ID"
+  apiKey: "AIzaSyCYgqDAU5GTRA4MNlIDGeT-PCQ1c4Vp-ow",
+  authDomain: "systembravo.firebaseapp.com",
+  projectId: "systembravo",
+  storageBucket: "systembravo.firebasestorage.app",
+  messagingSenderId: "699081831021",
+  appId: "1:699081831021:web:2d5a43981cd4fbe65bc564",
+  measurementId: "G-3L0H9KYLK1"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 const app = initializeApp(firebaseConfig);
 
