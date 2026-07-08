@@ -1,3 +1,5 @@
+alert("JS carregado");
+
 function ir(p){ location.href = p; }
 
 // =====================
