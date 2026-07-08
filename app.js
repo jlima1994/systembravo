@@ -1,3 +1,4 @@
+// ================== PAGINA 2 ==================
 function salvarPagina2(){
 
   const data = document.getElementById("data").value;
@@ -5,7 +6,7 @@ function salvarPagina2(){
   const descricao = document.getElementById("descricao").value;
 
   if(!data || !tipo){
-    alert("Preencha tudo");
+    alert("Preencha todos os campos!");
     return;
   }
 
@@ -19,33 +20,39 @@ function salvarPagina2(){
   location.href = "pagina3.html";
 }
 
+// ================== PAGINA 3 ==================
 function salvarPagina3(){
-  sessionStorage.setItem("motorista", motorista.value);
-  sessionStorage.setItem("seguranca", seguranca.value);
+  sessionStorage.setItem("motorista", document.getElementById("motorista").value);
+  sessionStorage.setItem("seguranca", document.getElementById("seguranca").value);
   location.href = "pagina4.html";
 }
 
+// ================== PAGINA 4 ==================
 function salvarPagina4(){
-  sessionStorage.setItem("placa", placa.value);
+  sessionStorage.setItem("placa", document.getElementById("placa").value);
   location.href = "pagina5.html";
 }
 
+// ================== PAGINA 5 ==================
 function salvarPagina5(){
-  sessionStorage.setItem("kmInicial", kmInicial.value);
+  sessionStorage.setItem("kmInicial", document.getElementById("kmInicial").value);
   location.href = "pagina6.html";
 }
 
+// ================== PAGINA 6 ==================
 function salvarPagina6(){
-  sessionStorage.setItem("kmFinal", kmFinal.value);
+  sessionStorage.setItem("kmFinal", document.getElementById("kmFinal").value);
   location.href = "pagina7.html";
 }
 
+// ================== PAGINA 7 ==================
 function salvarPagina7(){
-  sessionStorage.setItem("pedagio", pedagio.value);
+  sessionStorage.setItem("pedagio", document.getElementById("pedagio").value);
   location.href = "pagina8.html";
 }
 
-async function finalizarRegistro(){
+// ================== FINAL ==================
+function finalizarRegistro(){
 
   const dados = {
     data: sessionStorage.getItem("data"),
@@ -59,38 +66,55 @@ async function finalizarRegistro(){
     pedagio: sessionStorage.getItem("pedagio")
   };
 
-  await salvarRegistro(dados);
+  let lista = JSON.parse(localStorage.getItem("registros")) || [];
+  lista.push(dados);
+  localStorage.setItem("registros", JSON.stringify(lista));
+
+  // mantém dados para resumo
+  sessionStorage.setItem("ultimoRegistro", JSON.stringify(dados));
 
   sessionStorage.clear();
 
   location.href = "pagina9.html";
 }
 
-// RESUMO
+// ================== RESUMO ==================
 function carregarResumo(){
 
+  const dados = JSON.parse(sessionStorage.getItem("ultimoRegistro"));
+
+  if(!dados) return;
+
   const texto = `
-  ${sessionStorage.getItem("data")}
+${dados.data}
 
-  ${(sessionStorage.getItem("tipo") + " " + sessionStorage.getItem("descricao")).toUpperCase()}
+${(dados.tipo + " " + dados.descricao).toUpperCase()}
 
-  EQUIPE:
-  ${sessionStorage.getItem("motorista")}
-  ${sessionStorage.getItem("seguranca")}
+EQUIPE:
+${dados.motorista}
+${dados.seguranca}
 
-  VEÍCULO:
-  ${sessionStorage.getItem("placa")}
+VEÍCULO:
+${dados.placa}
 
-  KM:
-  ${sessionStorage.getItem("kmInicial")} → ${sessionStorage.getItem("kmFinal")}
-  `;
+KM:
+${dados.kmInicial} → ${dados.kmFinal}
+
+PEDÁGIO:
+R$ ${dados.pedagio}
+`;
 
   document.getElementById("resumo").innerText = texto;
 }
 
-// segurança contra erro
-if (window.location.pathname.includes("pagina9")){
-  if(typeof carregarResumo === "function"){
+// ================== NOVO ==================
+function novo(){
+  window.location.href = "pagina2.html";
+}
+
+// ================== EXECUÇÃO SEGURA ==================
+if (window.location.pathname.includes("pagina9.html")) {
+  if (typeof carregarResumo === "function") {
     carregarResumo();
   }
 }
