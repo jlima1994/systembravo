@@ -35,18 +35,18 @@ ir("pagina4.html");
 
 // ================= PAGINA 4 =================
 function salvarPagina4(){
-const hora = document.getElementById("horaInicialDesloc").value;
-const km = document.getElementById("kmInicialDesloc").value;
+  const hora = document.getElementById("horaInicialDeslocamento").value;
+  const km = document.getElementById("kmInicialDeslocamento").value;
 
-if(hora === "" || km === ""){
-alert("Preencha todos os campos!");
-return;
-}
+  if(hora === "" || km === ""){
+    alert("Preencha os campos");
+    return;
+  }
 
-salvarTemp("horaInicialDesloc", hora);
-salvarTemp("kmInicialDesloc", km);
+  localStorage.setItem("horaInicialDeslocamento", hora);
+  localStorage.setItem("kmInicialDeslocamento", km);
 
-ir("pagina5.html");
+  location.href = "pagina5.html";
 }
 
 // ================= PAGINA 5 =================
@@ -83,20 +83,19 @@ ir("pagina7.html");
 
 // ================= PAGINA 7 =================
 function salvarPagina7(){
-const hora = document.getElementById("horaFinalDesloc").value;
-const km = document.getElementById("kmFinalDesloc").value;
+  const hora = document.getElementById("horaFinalDeslocamento").value;
+  const km = document.getElementById("kmFinalDeslocamento").value;
 
-if(hora === "" || km === ""){
-alert("Preencha todos os campos!");
-return;
+  if(hora === "" || km === ""){
+    alert("Preencha os campos");
+    return;
+  }
+
+  localStorage.setItem("horaFinalDeslocamento", hora);
+  localStorage.setItem("kmFinalDeslocamento", km);
+
+  location.href = "pagina8.html";
 }
-
-salvarTemp("horaFinalDesloc", hora);
-salvarTemp("kmFinalDesloc", km);
-
-ir("pagina8.html");
-}
-
 // ================= PAGINA 8 =================
 function salvarPagina8(){
   try {
