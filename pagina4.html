@@ -1,55 +1,11 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Deslocamento Inicial</title>
-
-  <style>
-    body{
-      font-family: Arial;
-      padding:20px;
-      max-width:500px;
-      margin:auto;
-    }
-
-    h2{
-      text-align:center;
-    }
-
-    input{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      font-size:16px;
-    }
-
-    button{
-      width:100%;
-      padding:15px;
-      margin-top:20px;
-      font-size:18px;
-      background:#007bff;
-      color:white;
-      border:none;
-      border-radius:5px;
-    }
-  </style>
-</head>
-
 <body>
 
-<h2>Deslocamento Inicial</h2>
+<h3>Equipe</h3>
 
-<label>Hora Inicial</label>
-<input type="time" id="horaInicialDeslocamento">
+<input id="motorista" placeholder="Motorista"><br>
+<input id="seguranca" placeholder="Segurança"><br>
 
-<label>KM Inicial</label>
-<input type="number" id="kmInicialDeslocamento" maxlength="6">
+<button onclick="salvarPagina3()">Avançar</button>
 
-<button onclick="salvarPagina4()">Próximo</button>
-
-<script src="app.js?v=10"></script>
-
+<script src="app.js"></script>
 </body>
-</html>
