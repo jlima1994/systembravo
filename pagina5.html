@@ -1,27 +1,10 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-</head>
 <body>
 
-<h3 id="titulo5"></h3>
+<h3>KM Inicial</h3>
 
-<label>Hora Inicial</label> <input type="time" id="horaInicialServico">
+<input id="kmInicial"><br>
 
-<label>KM Inicial</label> <input type="number" id="kmInicialServico">
-
-<button onclick="salvarPagina5()">Próximo</button>
- <!--<button onclick="alert(typeof salvarPagina5)">Teste</button>-->
-
-<script>
-document.getElementById("titulo5").innerText =
-"Início da " + localStorage.getItem("tipo");
-</script>
+<button onclick="salvarPagina5()">Avançar</button>
 
 <script src="app.js"></script>
-
 </body>
-</html>
