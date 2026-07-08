@@ -1,26 +1,10 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-</head>
 <body>
 
-<h3 id="titulo6"></h3>
+<h3>KM Final</h3>
 
-<label>Hora Final</label> <input type="time" id="horaFinalServico">
+<input id="kmFinal"><br>
 
-<label>KM Final</label> <input type="number" id="kmFinalServico">
-
-<button onclick="salvarPagina6()">Próximo</button>
-
-<script>
-document.getElementById("titulo6").innerText =
-"Final da " + localStorage.getItem("tipo");
-</script>
+<button onclick="salvarPagina6()">Avançar</button>
 
 <script src="app.js"></script>
-
 </body>
-</html>
