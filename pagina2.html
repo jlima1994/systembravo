@@ -17,7 +17,37 @@
 
 <button onclick="salvarPagina2()">Próximo</button>
 
-<script src="app.js"></script>
+<script>
+function salvarPagina2(){
+
+  const dataInput = document.getElementById("data").value;
+
+  let tipo = "";
+  if(document.getElementById("escolta").checked){
+    tipo = "Escolta";
+  } else if(document.getElementById("preservacao").checked){
+    tipo = "Preservação";
+  }
+
+  const descricao = document.getElementById("descricao").value;
+
+  if(!dataInput || !tipo){
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  // ✅ CONVERTER DATA PARA PADRÃO BRASIL
+  const partes = dataInput.split("-");
+  const dataBR = `${partes[2]}/${partes[1]}/${partes[0]}`;
+
+  // ✅ SALVAR TUDO
+  localStorage.setItem("data", dataBR);
+  localStorage.setItem("tipoServico", tipo);
+  localStorage.setItem("descricao", descricao);
+
+  location.href = "pagina3.html";
+}
+</script>
 
 </body>
 </html>
