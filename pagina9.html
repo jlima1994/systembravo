@@ -48,69 +48,70 @@
 <script src="app.js?v=9"></script>
 
 <script>
-  function carregarResumo(){
+<script>
+function carregarResumo(){
 
-    const data = localStorage.getItem("data") || "";
-    const tipo = localStorage.getItem("tipoServico") || "";
-    const descricao = localStorage.getItem("descricao") || "";
+  const data = (localStorage.getItem("data") || "").toUpperCase();
 
-    const placa = localStorage.getItem("placa") || "";
-    const motorista = localStorage.getItem("motorista") || "";
-    const seguranca = localStorage.getItem("seguranca") || "";
+  const tipo = (localStorage.getItem("tipoServico") || "").toUpperCase();
+  const descricao = (localStorage.getItem("descricao") || "").toUpperCase();
 
-    const km4 = localStorage.getItem("kmInicialDeslocamento") || 0;
-    const hora4 = localStorage.getItem("horaInicialDeslocamento") || "";
+  const placa = (localStorage.getItem("placa") || "").toUpperCase();
+  const motorista = (localStorage.getItem("motorista") || "").toUpperCase();
+  const seguranca = (localStorage.getItem("seguranca") || "").toUpperCase();
 
-    const km5 = localStorage.getItem("kmInicialServico") || 0;
-    const hora5 = localStorage.getItem("horaInicialServico") || "";
+  const km4 = localStorage.getItem("kmInicialDeslocamento") || 0;
+  const hora4 = (localStorage.getItem("horaInicialDeslocamento") || "").toUpperCase();
 
-    const km6 = localStorage.getItem("kmFinalServico") || 0;
-    const hora6 = localStorage.getItem("horaFinalServico") || "";
+  const km5 = localStorage.getItem("kmInicialServico") || 0;
+  const hora5 = (localStorage.getItem("horaInicialServico") || "").toUpperCase();
 
-    const km7 = localStorage.getItem("kmFinalDeslocamento") || 0;
-    const hora7 = localStorage.getItem("horaFinalDeslocamento") || "";
+  const km6 = localStorage.getItem("kmFinalServico") || 0;
+  const hora6 = (localStorage.getItem("horaFinalServico") || "").toUpperCase();
 
-    const pedagios = JSON.parse(localStorage.getItem("pedagios") || "[]");
+  const km7 = localStorage.getItem("kmFinalDeslocamento") || 0;
+  const hora7 = (localStorage.getItem("horaFinalDeslocamento") || "").toUpperCase();
 
-    const kmTotal = km7 - km4;
+  const pedagios = JSON.parse(localStorage.getItem("pedagios") || "[]");
 
-    let texto = `
-Data: ${data}
+  const kmTotal = km7 - km4;
 
-Equipe:
-Veículo: ${placa}
-Mot: ${motorista}
-Seg: ${seguranca}
+  let texto = `
+DATA: ${data}
 
-${tipo}
-${descricao}
+${tipo} - ${descricao}
 
-Deslocamento: ${km4} (${hora4})
-Inicio ${tipo}: ${km5} (${hora5})
-Final ${tipo}: ${km6} (${hora6})
-Deslocamento: ${km7} (${hora7})
+EQUIPE:
+VEÍCULO: ${placa}
+MOT: ${motorista}
+SEG: ${seguranca}
 
-Deslocamento total: ${kmTotal} km
+DESLOCAMENTO: ${km4} (${hora4})
+INICIO ${tipo}: ${km5} (${hora5})
+FINAL ${tipo}: ${km6} (${hora6})
+DESLOCAMENTO: ${km7} (${hora7})
 
-Pedágios:
+DESLOCAMENTO TOTAL: ${kmTotal} KM
+
+PEDÁGIOS:
 `;
 
-    if(pedagios.length === 0){
-      texto += "Nenhum\n";
-    } else {
-      pedagios.forEach(p => {
-        texto += `Qtd: ${p.quantidade} | Valor: R$ ${p.valor}\n`;
-      });
-    }
-
-    document.getElementById("resumo").textContent = texto;
+  if(pedagios.length === 0){
+    texto += "NENHUM\n";
+  } else {
+    pedagios.forEach(p => {
+      texto += `QTD: ${p.quantidade} | VALOR: R$ ${p.valor}\n`;
+    });
   }
 
-  function irRelatorio(){
-    location.href = "pagina10.html";
-  }
+  document.getElementById("resumo").textContent = texto;
+}
 
-  carregarResumo();
+function irRelatorio(){
+  location.href = "pagina10.html";
+}
+
+carregarResumo();
 </script>
 
 </body>
