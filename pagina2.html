@@ -2,24 +2,24 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial;padding:15px}
+input, textarea, button{width:100%;font-size:18px;margin-top:10px;padding:10px}
+</style>
 </head>
 
 <body>
 
-<h3>Dados do Serviço</h3>
+<h3>DADOS DO SERVIÇO</h3>
 
-<input type="date" id="data"><br><br>
+<input type="date" id="data">
 
-<label><input type="radio" name="tipo" value="ESCOLTA"> Escolta</label>
-<label><input type="radio" name="tipo" value="PRESERVAÇÃO"> Preservação</label>
+<label><input type="radio" name="tipo" value="ESCOLTA"> ESCOLTA</label>
+<label><input type="radio" name="tipo" value="PRESERVAÇÃO"> PRESERVAÇÃO</label>
 
-<br><br>
+<textarea id="descricao" placeholder="DESCRIÇÃO DO SERVIÇO"></textarea>
 
-<textarea id="descricao" placeholder="Descrição"></textarea>
-
-<br><br>
-
-<button onclick="salvarPagina2()">Avançar</button>
+<button onclick="salvarPagina2()">AVANÇAR</button>
 
 <script src="app.js"></script>
 </body>
