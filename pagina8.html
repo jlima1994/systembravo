@@ -1,32 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedágios</title>
+
+  <style>
+    body{
+      font-family: Arial;
+      padding:20px;
+      max-width:500px;
+      margin:auto;
+    }
+
+    h2{
+      text-align:center;
+    }
+
+    .linha{
+      display:flex;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    select, input{
+      flex:1;
+      padding:10px;
+      font-size:16px;
+    }
+
+    button{
+      width:100%;
+      padding:15px;
+      font-size:18px;
+      margin-top:20px;
+      background:#007bff;
+      color:white;
+      border:none;
+      border-radius:5px;
+    }
+  </style>
 </head>
+
 <body>
 
-<h3>Pedágios</h3>
+<h2>Pedágios</h2>
 
-<div id="pedagios"></div>
+<div id="listaPedagios"></div>
 
-<button onclick="salvarPagina8()">Próximo</button>
+<button onclick="salvarPagina8()">Finalizar</button>
+
+<script src="app.js?v=8"></script>
 
 <script>
-let html = "";
-for(let i=0;i<10;i++){
-  html += `
-    <div style="display:flex; gap:5px; margin-bottom:5px;">
-      <select id="qtd${i}">
-        ${[...Array(21).keys()].map(n=>`<option value="${n}">${n}</option>`).join("")}
-      </select>
-      <input type="number" id="valor${i}" placeholder="Valor até 100">
-    </div>
-  `;
-}
-document.getElementById("pedagios").innerHTML = html;
+  // gera 10 linhas automaticamente
+  const container = document.getElementById("listaPedagios");
+
+  for(let i = 1; i <= 10; i++){
+    container.innerHTML += `
+      <div class="linha">
+        <select id="qtdPedagio${i}">
+          ${[...Array(21).keys()].map(n => `<option value="${n}">${n}</option>`).join("")}
+        </select>
+
+        <input 
+          type="number" 
+          id="valorPedagio${i}" 
+          placeholder="Valor R$"
+          step="0.01"
+          max="100"
+        >
+      </div>
+    `;
+  }
 </script>
 
-<script src="app.js"></script>
 </body>
 </html>
