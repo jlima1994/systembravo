@@ -99,25 +99,37 @@ ir("pagina8.html");
 
 // ================= PAGINA 8 =================
 function salvarPagina8(){
+  try {
 
-let pedagios = [];
+    let pedagios = [];
 
-for(let i=0;i<10;i++){
-let qtd = document.getElementById("qtd"+i).value;
-let valor = document.getElementById("valor"+i).value;
+    for(let i = 1; i <= 10; i++){
 
-```
-if(qtd > 0){
-  pedagios.push({
-    quantidade: qtd,
-    valor: valor
-  });
-}
-```
+      const qtdEl = document.getElementById("qtdPedagio" + i);
+      const valEl = document.getElementById("valorPedagio" + i);
 
-}
+      if(!qtdEl || !valEl) continue;
 
-localStorage.setItem("pedagios", JSON.stringify(pedagios));
+      const qtd = parseInt(qtdEl.value) || 0;
+      const valor = parseFloat(valEl.value) || 0;
 
-ir("pagina9.html");
+      if(qtd > 0){
+        pedagios.push({
+          quantidade: qtd,
+          valor: valor
+        });
+      }
+    }
+
+    // salva no localStorage
+    localStorage.setItem("pedagios", JSON.stringify(pedagios));
+
+    alert("Pedágios salvos com sucesso!");
+
+    // vai pra próxima página
+    location.href = "pagina9.html";
+
+  } catch(e){
+    alert("Erro: " + e.message);
+  }
 }
