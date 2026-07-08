@@ -1,162 +1,96 @@
-function ir(p){
-location.href = p;
-}
-
-function salvarTemp(chave, valor){
-localStorage.setItem(chave, valor);
-}
-
-// ================= PAGINA 2 =================
 function salvarPagina2(){
-const data = document.getElementById("data").value;
-const tipoSelecionado = document.querySelector('input[name="tipo"]:checked');
-const descricao = document.getElementById("descricao").value;
 
-if(!tipoSelecionado){
-alert("Selecione o tipo!");
-return;
+  const data = document.getElementById("data").value;
+  const tipo = document.querySelector("input[name='tipo']:checked")?.value;
+  const descricao = document.getElementById("descricao").value;
+
+  if(!data || !tipo){
+    alert("Preencha tudo");
+    return;
+  }
+
+  const d = data.split("-");
+  const dataBR = `${d[2]}/${d[1]}/${d[0]}`;
+
+  sessionStorage.setItem("data", dataBR);
+  sessionStorage.setItem("tipo", tipo);
+  sessionStorage.setItem("descricao", descricao);
+
+  location.href = "pagina3.html";
 }
 
-salvarTemp("data", data);
-salvarTemp("tipo", tipoSelecionado.value);
-salvarTemp("descricao", descricao);
-
-ir("pagina3.html");
-}
-
-// ================= PAGINA 3 =================
 function salvarPagina3(){
-salvarTemp("placa", document.getElementById("placa").value);
-salvarTemp("motorista", document.getElementById("motorista").value);
-salvarTemp("seguranca", document.getElementById("seguranca").value);
-
-ir("pagina4.html");
+  sessionStorage.setItem("motorista", motorista.value);
+  sessionStorage.setItem("seguranca", seguranca.value);
+  location.href = "pagina4.html";
 }
 
-// ================= PAGINA 4 =================
 function salvarPagina4(){
-  try {
-
-    const horaEl = document.getElementById("horaInicialDeslocamento");
-    const kmEl = document.getElementById("kmInicialDeslocamento");
-
-    if(!horaEl || !kmEl){
-      alert("Erro: campos não encontrados");
-      return;
-    }
-
-    const hora = horaEl.value;
-    const km = kmEl.value;
-
-    if(hora === "" || km === ""){
-      alert("Preencha todos os campos!");
-      return;
-    }
-
-    localStorage.setItem("horaInicialDeslocamento", hora);
-    localStorage.setItem("kmInicialDeslocamento", km);
-
-    location.href = "pagina5.html";
-
-  } catch(e){
-    alert("Erro: " + e.message);
-  }
+  sessionStorage.setItem("placa", placa.value);
+  location.href = "pagina5.html";
 }
 
-// ================= PAGINA 5 =================
 function salvarPagina5(){
-const hora = document.getElementById("horaInicialServico").value;
-const km = document.getElementById("kmInicialServico").value;
-
-if(hora === "" || km === ""){
-alert("Preencha todos os campos!");
-return;
+  sessionStorage.setItem("kmInicial", kmInicial.value);
+  location.href = "pagina6.html";
 }
 
-salvarTemp("horaInicialServico", hora);
-salvarTemp("kmInicialServico", km);
-
-ir("pagina6.html");
-}
-
-// ================= PAGINA 6 =================
 function salvarPagina6(){
-const hora = document.getElementById("horaFinalServico").value;
-const km = document.getElementById("kmFinalServico").value;
-
-if(hora === "" || km === ""){
-alert("Preencha todos os campos!");
-return;
+  sessionStorage.setItem("kmFinal", kmFinal.value);
+  location.href = "pagina7.html";
 }
 
-salvarTemp("horaFinalServico", hora);
-salvarTemp("kmFinalServico", km);
-
-ir("pagina7.html");
-}
-
-// ================= PAGINA 7 =================
 function salvarPagina7(){
-  try {
-
-    const horaEl = document.getElementById("horaFinalDeslocamento");
-    const kmEl = document.getElementById("kmFinalDeslocamento");
-
-    if(!horaEl || !kmEl){
-      alert("Erro: campos não encontrados");
-      return;
-    }
-
-    const hora = horaEl.value;
-    const km = kmEl.value;
-
-    if(hora === "" || km === ""){
-      alert("Preencha todos os campos!");
-      return;
-    }
-
-    localStorage.setItem("horaFinalDeslocamento", hora);
-    localStorage.setItem("kmFinalDeslocamento", km);
-
-    location.href = "pagina8.html";
-
-  } catch(e){
-    alert("Erro: " + e.message);
-  }
+  sessionStorage.setItem("pedagio", pedagio.value);
+  location.href = "pagina8.html";
 }
-// ================= PAGINA 8 =================
-function salvarPagina8(){
-  try {
 
-    let pedagios = [];
+async function finalizarRegistro(){
 
-    for(let i = 1; i <= 10; i++){
+  const dados = {
+    data: sessionStorage.getItem("data"),
+    tipo: sessionStorage.getItem("tipo"),
+    descricao: sessionStorage.getItem("descricao"),
+    motorista: sessionStorage.getItem("motorista"),
+    seguranca: sessionStorage.getItem("seguranca"),
+    placa: sessionStorage.getItem("placa"),
+    kmInicial: sessionStorage.getItem("kmInicial"),
+    kmFinal: sessionStorage.getItem("kmFinal"),
+    pedagio: sessionStorage.getItem("pedagio")
+  };
 
-      const qtdEl = document.getElementById("qtdPedagio" + i);
-      const valEl = document.getElementById("valorPedagio" + i);
+  await salvarRegistro(dados);
 
-      if(!qtdEl || !valEl) continue;
+  sessionStorage.clear();
 
-      const qtd = parseInt(qtdEl.value) || 0;
-      const valor = parseFloat(valEl.value) || 0;
+  location.href = "pagina9.html";
+}
 
-      if(qtd > 0){
-        pedagios.push({
-          quantidade: qtd,
-          valor: valor
-        });
-      }
-    }
+// RESUMO
+function carregarResumo(){
 
-    // salva no localStorage
-    localStorage.setItem("pedagios", JSON.stringify(pedagios));
+  const texto = `
+  ${sessionStorage.getItem("data")}
 
-    alert("Pedágios salvos com sucesso!");
+  ${(sessionStorage.getItem("tipo") + " " + sessionStorage.getItem("descricao")).toUpperCase()}
 
-    // vai pra próxima página
-    location.href = "pagina9.html";
+  EQUIPE:
+  ${sessionStorage.getItem("motorista")}
+  ${sessionStorage.getItem("seguranca")}
 
-  } catch(e){
-    alert("Erro: " + e.message);
+  VEÍCULO:
+  ${sessionStorage.getItem("placa")}
+
+  KM:
+  ${sessionStorage.getItem("kmInicial")} → ${sessionStorage.getItem("kmFinal")}
+  `;
+
+  document.getElementById("resumo").innerText = texto;
+}
+
+// segurança contra erro
+if (window.location.pathname.includes("pagina9")){
+  if(typeof carregarResumo === "function"){
+    carregarResumo();
   }
 }
