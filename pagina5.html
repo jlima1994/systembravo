@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
 <body>
 
-<h3>Início do Serviço</h3>
+<h3 id="titulo5"></h3>
 
-Hora: <input type="time" id="hora5"><br><br>
-KM: <input type="number" id="km5"><br><br>
+<label>Hora Inicial</label> <input type="time" id="horaInicialServico">
 
-<button onclick="salvar('hora5','km5','pagina6.html')">Próximo</button>
+<label>KM Inicial</label> <input type="number" id="kmInicialServico">
+
+<button onclick="salvarPagina5()">Próximo</button>
+
+<script>
+document.getElementById("titulo5").innerText =
+"Início da " + localStorage.getItem("tipo");
+</script>
 
 <script src="app.js"></script>
 
