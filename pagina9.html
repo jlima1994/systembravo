@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-
-<html>
-<body>
-
-<h3>Resenha</h3>
-
-<pre id="resenha"></pre>
-
-<script src="app.js"></script>
-
 <script>
-gerarResenha();
+document.body.innerHTML = `
+${localStorage.getItem("data")}
+${localStorage.getItem("tipo")}
+${localStorage.getItem("descricao")}
+`;
 </script>
-
-</body>
-</html>
+<button onclick="finalizar()">Salvar</button>
