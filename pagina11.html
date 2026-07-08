@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-
-<html>
-<body>
-
-<h3>Relatório</h3>
-
-<div id="tabela"></div>
-
-<script src="app.js"></script>
-
 <script>
-mostrarTabela();
-</script>
+let registros = JSON.parse(localStorage.getItem("registros")) || [];
 
-</body>
-</html>
+document.write("<table border=1>");
+document.write("<tr><th>Data</th><th>Tipo</th><th>KM</th></tr>");
+
+registros.forEach(r=>{
+  document.write(`<tr>
+    <td>${r.data}</td>
+    <td>${r.tipo}</td>
+    <td>${r.kmInicialDesloc}</td>
+  </tr>`);
+});
+
+document.write("</table>");
+</script>
