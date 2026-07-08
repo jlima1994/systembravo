@@ -1,36 +1,30 @@
-<!-- firebase.js -->
-<script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { 
-  getAuth, 
-  GoogleAuthProvider, 
-  signInWithPopup,
-  onAuthStateChanged 
+
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import { 
-  getFirestore, 
-  collection, 
+import {
+  getFirestore,
+  collection,
   addDoc,
   getDocs,
   query,
   where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// 🔴 COLE SUA CONFIG AQUI
 const firebaseConfig = {
   apiKey: "SUA_KEY",
   authDomain: "SEU_DOMINIO",
-  projectId: "SEU_ID",
+  projectId: "SEU_ID"
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
-window.db = db;
-window.auth = auth;
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 // LOGIN
 window.loginGoogle = async function(){
@@ -38,9 +32,25 @@ window.loginGoogle = async function(){
   await signInWithPopup(auth, provider);
 };
 
-// USUÁRIO LOGADO
-window.getUser = function(){
-  return auth.currentUser;
+// SALVAR
+window.salvarRegistro = async function(dados){
+  const user = auth.currentUser;
+
+  await addDoc(collection(db, "registros"), {
+    uid: user.uid,
+    ...dados,
+    createdAt: new Date()
+  });
 };
 
-</script>
+// BUSCAR
+window.buscarRegistros = async function(){
+  const user = auth.currentUser;
+
+  const q = query(
+    collection(db, "registros"),
+    where("uid", "==", user.uid)
+  );
+
+  return await getDocs(q);
+};
