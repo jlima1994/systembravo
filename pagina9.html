@@ -1,8 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumo</title>
+
+  <style>
+    body{
+      font-family: Arial;
+      padding:20px;
+      max-width:600px;
+      margin:auto;
+    }
+
+    h2{
+      text-align:center;
+    }
+
+    pre{
+      background:#f4f4f4;
+      padding:15px;
+      white-space:pre-wrap;
+      border-radius:5px;
+    }
+
+    button{
+      width:100%;
+      padding:15px;
+      margin-top:20px;
+      font-size:18px;
+      background:#28a745;
+      color:white;
+      border:none;
+      border-radius:5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Resumo do Serviço</h2>
+
+<pre id="resumo"></pre>
+
+<button onclick="irRelatorio()">Gerar Relatório</button>
+
+<script src="app.js?v=9"></script>
+
 <script>
-document.body.innerHTML = `
-${localStorage.getItem("data")}
-${localStorage.getItem("tipo")}
-${localStorage.getItem("descricao")}
+  function carregarResumo(){
+
+    const data = localStorage.getItem("data") || "";
+    const tipo = localStorage.getItem("tipoServico") || "";
+    const descricao = localStorage.getItem("descricao") || "";
+
+    const placa = localStorage.getItem("placa") || "";
+    const motorista = localStorage.getItem("motorista") || "";
+    const seguranca = localStorage.getItem("seguranca") || "";
+
+    const km4 = localStorage.getItem("kmInicialDeslocamento") || 0;
+    const hora4 = localStorage.getItem("horaInicialDeslocamento") || "";
+
+    const km5 = localStorage.getItem("kmInicialServico") || 0;
+    const hora5 = localStorage.getItem("horaInicialServico") || "";
+
+    const km6 = localStorage.getItem("kmFinalServico") || 0;
+    const hora6 = localStorage.getItem("horaFinalServico") || "";
+
+    const km7 = localStorage.getItem("kmFinalDeslocamento") || 0;
+    const hora7 = localStorage.getItem("horaFinalDeslocamento") || "";
+
+    const pedagios = JSON.parse(localStorage.getItem("pedagios") || "[]");
+
+    const kmTotal = km7 - km4;
+
+    let texto = `
+Data: ${data}
+
+Equipe:
+Veículo: ${placa}
+Mot: ${motorista}
+Seg: ${seguranca}
+
+${tipo}
+${descricao}
+
+Deslocamento: ${km4} (${hora4})
+Inicio ${tipo}: ${km5} (${hora5})
+Final ${tipo}: ${km6} (${hora6})
+Deslocamento: ${km7} (${hora7})
+
+Deslocamento total: ${kmTotal} km
+
+Pedágios:
 `;
+
+    if(pedagios.length === 0){
+      texto += "Nenhum\n";
+    } else {
+      pedagios.forEach(p => {
+        texto += `Qtd: ${p.quantidade} | Valor: R$ ${p.valor}\n`;
+      });
+    }
+
+    document.getElementById("resumo").textContent = texto;
+  }
+
+  function irRelatorio(){
+    location.href = "pagina10.html";
+  }
+
+  carregarResumo();
 </script>
-<button onclick="finalizar()">Salvar</button>
+
+</body>
+</html>
